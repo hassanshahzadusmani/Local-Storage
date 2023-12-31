@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+<script>
+function Registration() {
+    var userEmail = document.getElementById("email").value;
+    var userPassword = document.getElementById("password").value;
+    console.log(userEmail);
+    console.log(userPassword);
+
+    let obj = {
+        email: userEmail,
+        password: userPassword
+    }
+
+    let showallusers = localStorage.getItem('mykey');
+    
+
+    if (showallusers === null) {
+        showallusers = [];
+    }
+    else
+    {
+        showallusers = JSON.parse(showallusers);
+        for (let index = 0; index < showallusers.length; index++) {
+
+            if (showallusers[index].userEmail === userEmail)
+            {
+            alert("Username already exist. Please choosea different username");
+            return;
+            }      
+    }
+
+    showallusers.push(obj);
+
+    console.log(showallusers);
+    let jsonData = JSON.stringify(showallusers);
+    localStorage.setItem("mykey", jsonData);
+    alert("Registration Successful");
+    window.location.href = "./login.html"
+}
+}
+</script>
+</head>
+
+<body>
+    <h1>Sign Up Form</h1>
+
+    <label>Enter User Email: </label>
+    <input type="text" id="email"> <br />
+
+    <label>Enter User Password: </label>
+    <input type="text" id="password"> <br />
+
+
+    <button onclick="Registration()">Sign Up</button>
+    </body>
+
+</html>
